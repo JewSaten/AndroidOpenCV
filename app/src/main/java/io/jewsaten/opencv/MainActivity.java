@@ -39,10 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setTag(imageView);
     }
 
-    public void onGaussianBlur(View view) {
-        final ImageView target = (ImageView) view.getTag();
-        Bitmap src = ((BitmapDrawable) target.getDrawable()).getBitmap();
-
+    private void processBlur(final ImageView target, Bitmap src) {
         Observable.just(src).map(new Func1<Bitmap, Bitmap>() {
             @Override
             public Bitmap call(Bitmap bitmap) {
@@ -74,5 +71,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void onGaussianBlur(View view) {
+        final ImageView target = (ImageView) view.getTag();
+        Bitmap src = ((BitmapDrawable) target.getDrawable()).getBitmap();
+        processBlur(target, src);
+    }
 
 }
